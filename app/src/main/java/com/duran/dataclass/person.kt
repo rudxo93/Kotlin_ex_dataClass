@@ -5,9 +5,16 @@ class Person (
     var name: String,
     var age: Int,
     var sex: String
-    )
+    ) {
+    // 클래스에 toString을 override
+    override fun toString(): String {
+        return "Person(name=$name, age=$age, sex=$sex)"
+    }
+}
 
 fun main() {
     val person1 = Person("Alice", 20, "female")
-    println(person1) // -> com.duran.dataclass.Person@71be98f5
+    // println(person1) // -> com.duran.dataclass.Person@71be98f5
+    // 클래스에 toString을 override을 해주게되면 랜덤한 값이 아니라 클래스가 가진 property를 보여준다.
+    println(person1) // -> Person(name=Alice, age=20, sex=female)
 }
