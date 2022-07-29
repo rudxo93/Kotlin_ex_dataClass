@@ -17,6 +17,11 @@ class Person (
         if(other == null || other !is Person) return false
         return name == other.name && age == other.age && sex == other.sex
     }
+
+    // 같은 속성을 가진 객체가 동일한 hash값을 갖기 때문에 동일한 객체 true
+    override fun hashCode(): Int {
+        return (name.hashCode() * 31 + age - sex.hashCode()) * 31
+    }
 }
 
 fun main() {
@@ -31,4 +36,10 @@ fun main() {
     // 내용이 동일함에도 불구하고 두 인스턴스가 같지않다는 판정이 나오게된다.
     // 위에서 equals를 override해주게되면 true로 바뀐다.
     println(person2 == person3) // false -> true
+
+    // hashCode는 instance의 hash값을 정의하는 메서드이다.
+    // 이 부분을 정의하지 않으면 equals값이 동일하더라도 서로 다른 객체가 되버린다.
+    val personSet = hashSetOf(Person("Alice", 20, "Female"))
+    println(personSet.contains(Person("Alice", 20, "Female"))) // false -> true
 }
+
